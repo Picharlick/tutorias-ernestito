@@ -72,17 +72,18 @@ body {
 
 .nav-links {
     display: flex;
-    gap: 2rem;
+    gap: 2.5rem; /* Más espacio entre enlaces */
 }
 
 .nav-links a {
     text-decoration: none;
     color: var(--text);
     font-weight: 600;
-    font-size: 1rem;
+    font-size: 1.1rem; /* Texto un poco más grande */
     transition: all 0.3s ease;
     position: relative;
-    padding: 0.5rem 0;
+    padding: 0.5rem 1rem; /* Más padding horizontal */
+    white-space: nowrap; /* Evita que se rompa en varias líneas */
 }
 
 .nav-links a:hover {
