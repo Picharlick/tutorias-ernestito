@@ -442,7 +442,71 @@ section {
 .close-modal:hover {
     color: var(--primary);
 }
+/* Sección Quiénes Somos */
+.about-section {
+    background: var(--background-alt);
+    padding: 6rem 0;
+}
 
+.about-content h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    color: var(--text);
+    font-weight: 700;
+}
+
+.about-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2.5rem;
+    margin-top: 2rem;
+}
+
+.about-item {
+    background: white;
+    padding: 2.5rem;
+    border-radius: 15px;
+    box-shadow: var(--shadow);
+    transition: transform 0.3s ease;
+    border-left: 4px solid var(--primary);
+}
+
+.about-item:hover {
+    transform: translateY(-5px);
+}
+
+.about-item h3 {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+    color: var(--primary);
+    font-weight: 600;
+}
+
+.about-item p {
+    color: var(--text-light);
+    line-height: 1.7;
+}
+
+.about-item ul {
+    list-style: none;
+    padding: 0;
+}
+
+.about-item li {
+    padding: 0.5rem 0;
+    color: var(--text-light);
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.about-item li::before {
+    content: "•";
+    color: var(--primary);
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+}
 /* RESPONSIVE */
 @media (max-width: 768px) {
     .nav-links {
