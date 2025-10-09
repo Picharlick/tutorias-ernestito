@@ -11,16 +11,16 @@ const tutors = [
     },
     {
         id: 2,
-        name: "Felipe Ybazexo",
+        name: "Rodrigo Mosquera",
         subject: "Ciencias",
         grades: ["4primaria", "5primaria", "6primaria", "1secundaria"],
         rating: 4.8,
         experience: "1 año",
-        university: "UPCex"
+        university: "PUCP"
     },
     {
         id: 3,
-        name: "La chata Vásquez",
+        name: "Alesia Vásquez",
         subject: "Inglés",
         grades: ["3primaria", "4primaria", "5primaria", "6primaria", "1secundaria", "2secundaria"],
         rating: 5.0,
@@ -34,7 +34,7 @@ const tutors = [
         grades: ["3secundaria", "4secundaria", "5secundaria"],
         rating: 4.7,
         experience: "2 años",
-        university: "Sideral Carrión"
+        university: "PUCP"
     }
 ];
 
