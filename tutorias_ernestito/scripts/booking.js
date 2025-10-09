@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Envío del formulario de contacto con administradores
     adminContactForm.addEventListener('submit', async function(e) {
-        e.preventDefault();
+        e.preventDefault();  // ← ESTA LÍNEA BLOQUEA EL ENVÍO
 
         const formData = {
             email: document.getElementById('adminEmail').value,
