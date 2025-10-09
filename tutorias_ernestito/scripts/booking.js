@@ -28,8 +28,10 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Envío del formulario de contacto con administradores
+    // COMENTADO - Formspree manejará el envío automáticamente
+    /*
     adminContactForm.addEventListener('submit', async function(e) {
-        e.preventDefault();  // ← ESTA LÍNEA BLOQUEA EL ENVÍO
+        e.preventDefault();
 
         const formData = {
             email: document.getElementById('adminEmail').value,
@@ -57,6 +59,7 @@ document.addEventListener('DOMContentLoaded', function() {
             showConfirmation('Error al enviar el mensaje. Por favor, intenta nuevamente.', true);
         }
     });
+    */
 
     // Mostrar modal de confirmación
     function showConfirmation(message, isError = false) {
