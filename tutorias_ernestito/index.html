@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorías Ernestito - Clases Personalizadas</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/booking.css">
+</head>
+<body>
+    <!-- Navegación -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">🎓 Tutorías Ernestito</div>
+            <div class="nav-links">
+                <a href="#inicio">Inicio</a>
+                <a href="#clases">Clases</a>
+                <a href="#tutores">Nuestros Tutores</a>
+                <a href="#agendar">Agendar Clase</a>
+                <a href="#contacto">Contacto</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="inicio">
+        <div class="hero-content">
+            <h1>Prueba 1 para mi ernestito bello</h1>
+            <p>acá pones cualquier webada para ganarte a los viejos y que ganen confianza supongo</p>
+            <div class="hero-buttons">
+                <a href="#agendar" class="cta-button primary">Agendar Primera Clase</a>
+                <a href="#tutores" class="cta-button secondary">Conocer Tutores</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Niveles -->
+    <section class="levels-section" id="clases">
+        <div class="container">
+            <h2>Selecciona el Nivel del Estudiante</h2>
+            <p class="section-subtitle">Encuentra el tutor perfecto para cada grado escolar</p>
+
+            <div class="levels-grid">
+                <!-- Primaria -->
+                <div class="level-category">
+                    <h3>Educación Primaria</h3>
+                    <div class="grades-grid">
+                        <div class="grade-card" data-level="1primaria">
+                            <span>1° Primaria</span>
+                        </div>
+                        <div class="grade-card" data-level="2primaria">
+                            <span>2° Primaria</span>
+                        </div>
+                        <div class="grade-card" data-level="3primaria">
+                            <span>3° Primaria</span>
+                        </div>
+                        <div class="grade-card" data-level="4primaria">
+                            <span>4° Primaria</span>
+                        </div>
+                        <div class="grade-card" data-level="5primaria">
+                            <span>5° Primaria</span>
+                        </div>
+                        <div class="grade-card" data-level="6primaria">
+                            <span>6° Primaria</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Secundaria -->
+                <div class="level-category">
+                    <h3>Educación Secundaria</h3>
+                    <div class="grades-grid">
+                        <div class="grade-card" data-level="1secundaria">
+                            <span>1° Secundaria</span>
+                        </div>
+                        <div class="grade-card" data-level="2secundaria">
+                            <span>2° Secundaria</span>
+                        </div>
+                        <div class="grade-card" data-level="3secundaria">
+                            <span>3° Secundaria</span>
+                        </div>
+                        <div class="grade-card" data-level="4secundaria">
+                            <span>4° Secundaria</span>
+                        </div>
+                        <div class="grade-card" data-level="5secundaria">
+                            <span>5° Secundaria</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Tutores -->
+    <section class="tutors-section" id="tutores">
+        <div class="container">
+            <h2>Nuestros Tutores Calificados (acá puse nombres random como para probar si funcionaba mi sistema de puntajes, parece que sí)</h2>
+            <div class="tutors-grid" id="tutorsGrid">
+                <!-- Los tutores se cargan dinámicamente -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Sistema de Agendamiento -->
+    <section class="booking-section" id="agendar">
+        <div class="container">
+            <h2>Agenda tu Clase</h2>
+            <p class="section-subtitle">Presencial o Virtual (supongo que también pueden ser virtuales)</p>
+
+            <div class="booking-form-container">
+                <form id="bookingForm" class="booking-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="studentName">Nombre del Estudiante *</label>
+                            <input type="text" id="studentName" name="studentName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="parentName">Nombre del Padre/Tutor *</label>
+                            <input type="text" id="parentName" name="parentName" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="nivel">Nivel del Estudiante *</label>
+                            <select id="nivel" name="nivel" required>
+                                <option value="">Selecciona el nivel</option>
+                                <optgroup label="Primaria">
+                                    <option value="1primaria">1° Primaria</option>
+                                    <option value="2primaria">2° Primaria</option>
+                                    <option value="3primaria">3° Primaria</option>
+                                    <option value="4primaria">4° Primaria</option>
+                                    <option value="5primaria">5° Primaria</option>
+                                    <option value="6primaria">6° Primaria</option>
+                                </optgroup>
+                                <optgroup label="Secundaria">
+                                    <option value="1secundaria">1° Secundaria</option>
+                                    <option value="2secundaria">2° Secundaria</option>
+                                    <option value="3secundaria">3° Secundaria</option>
+                                    <option value="4secundaria">4° Secundaria</option>
+                                    <option value="5secundaria">5° Secundaria</option>
+                                </optgroup>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="materia">Materia Principal *</label>
+                            <select id="materia" name="materia" required>
+                                <option value="">Selecciona materia</option>
+                                <option value="matematicas">Matemáticas</option>
+                                <option value="ciencias">Ciencias</option>
+                                <option value="lenguaje">Lenguaje y Comunicación</option>
+                                <option value="ingles">Inglés</option>
+                                <option value="historia">Historia</option>
+                                <option value="fisica">Física</option>
+                                <option value="quimica">Química</option>
+                                <option value="biologia">Biología</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="modalidad">Modalidad *</label>
+                            <select id="modalidad" name="modalidad" required>
+                                <option value="">Selecciona modalidad</option>
+                                <option value="presencial">Presencial</option>
+                                <option value="virtual">Virtual</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="fecha">Fecha Preferida *</label>
+                            <input type="date" id="fecha" name="fecha" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="horario">Horario Preferido *</label>
+                            <select id="horario" name="horario" required>
+                                <option value="">Selecciona horario</option>
+                                <option value="mañana">Mañana (8:00 - 12:00)</option>
+                                <option value="tarde">Tarde (14:00 - 18:00)</option>
+                                <option value="noche">Noche (18:00 - 21:00)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="frecuencia">Frecuencia *</label>
+                            <select id="frecuencia" name="frecuencia" required>
+                                <option value="">Selecciona frecuencia</option>
+                                <option value="unica">Clase Única</option>
+                                <option value="semanal">Una vez por semana</option>
+                                <option value="bisemanal">Dos veces por semana</option>
+                                <option value="diario">Clases diarias</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="contacto">Email *</label>
+                        <input type="email" id="contacto" name="contacto" required>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="telefono">Teléfono de Contacto *</label>
+                        <input type="tel" id="telefono" name="telefono" required>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="mensaje">Mensaje Adicional</label>
+                        <textarea id="mensaje" name="mensaje" rows="4" placeholder="Especifica temas específicos, dudas, o información adicional..."></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn" id="submitBtn">
+                        <span class="btn-text">Solicitar Clase</span>
+                        <span class="btn-loading" style="display: none;">Enviando...</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contacto -->
+    <section class="contact-section" id="contacto">
+        <div class="container">
+            <h2>Contacto</h2>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h3>Información de Contacto</h3>
+                    <div class="contact-item">
+                        <strong>📧 Email:</strong>
+                        <span>admin@tutoriasernestito.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <strong>📞 Teléfono:</strong>
+                        <span>+1 (555) 123-4567</span>
+                    </div>
+                    <div class="contact-item">
+                        <strong>🕒 Horario de Atención:</strong>
+                        <span>Lunes a Viernes: 8:00 - 20:00</span>
+                    </div>
+                </div>
+
+                <div class="admin-contact">
+                    <h3>Contacto Directo con Administradores</h3>
+                    <form id="adminContactForm">
+                        <div class="form-group">
+                            <label for="adminEmail">Tu Email *</label>
+                            <input type="email" id="adminEmail" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="adminSubject">Asunto *</label>
+                            <input type="text" id="adminSubject" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="adminMessage">Mensaje *</label>
+                            <textarea id="adminMessage" rows="4" required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Enviar Mensaje</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Tutorías Ernestito. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Modal de Confirmación -->
+    <div id="confirmationModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h3>¡Solicitud Enviada Exitosamente!</h3>
+            <p id="modalMessage">Nos contactaremos contigo dentro de las próximas 24 horas para confirmar los detalles de tu clase.</p>
+            <button id="modalCloseBtn" class="cta-button primary">Entendido</button>
+        </div>
+    </div>
+
+    <script src="scripts/main.js"></script>
+    <script src="scripts/booking.js"></script>
+</body>
+</html>
