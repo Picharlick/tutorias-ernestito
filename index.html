@@ -351,19 +351,19 @@ Creemos que el mejor apoyo viene de quien recién recorrió el camino. No somos 
                 </div>
 
                 <div class="admin-contact">
-                    <h3>Contacto Directo con Administradores</h3>
-                    <form id="adminContactForm">
+    <h3>Contacto Directo con Administradores</h3>
+    <form id="adminContactForm" action="https://formspree.io/f/xgvnlbnl" method="POST">
                         <div class="form-group">
                             <label for="adminEmail">Tu Email *</label>
-                            <input type="email" id="adminEmail" required>
+                            <input type="email" id="adminEmail" name="email" required>
                         </div>
                         <div class="form-group">
                             <label for="adminSubject">Asunto *</label>
-                            <input type="text" id="adminSubject" required>
+                            <input type="text" id="adminSubject" name="subject" required>
                         </div>
                         <div class="form-group">
                             <label for="adminMessage">Mensaje *</label>
-                            <textarea id="adminMessage" rows="4" required></textarea>
+                            <textarea id="adminMessage" name="message" rows="4" required></textarea>
                         </div>
                         <button type="submit" class="submit-btn">Enviar Mensaje</button>
                     </form>
