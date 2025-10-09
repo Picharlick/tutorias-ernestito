@@ -10,9 +10,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const today = new Date().toISOString().split('T')[0];
     document.getElementById('fecha').min = today;
 
-    // Envío del formulario principal
+    // Envío del formulario principal (AGENDAMIENTO)
     bookingForm.addEventListener('submit', async function(e) {
-        e.preventDefault();
+        // NO USAR e.preventDefault() - Permitir que Formspree envíe
 
         const submitBtn = document.getElementById('submitBtn');
         const btnText = submitBtn.querySelector('.btn-text');
@@ -23,44 +23,8 @@ document.addEventListener('DOMContentLoaded', function() {
         btnLoading.style.display = 'inline';
         submitBtn.disabled = true;
 
-        const formData = {
-            studentName: document.getElementById('studentName').value,
-            parentName: document.getElementById('parentName').value,
-            nivel: document.getElementById('nivel').value,
-            materia: document.getElementById('materia').value,
-            modalidad: document.getElementById('modalidad').value,
-            fecha: document.getElementById('fecha').value,
-            horario: document.getElementById('horario').value,
-            frecuencia: document.getElementById('frecuencia').value,
-            contacto: document.getElementById('contacto').value,
-            telefono: document.getElementById('telefono').value,
-            mensaje: document.getElementById('mensaje').value,
-            timestamp: new Date().toISOString()
-        };
-
-        try {
-            // Simular envío (en producción esto iría a un servidor)
-            await new Promise(resolve => setTimeout(resolve, 2000));
-
-            // Guardar en localStorage como respaldo
-            const existingBookings = JSON.parse(localStorage.getItem('bookings') || '[]');
-            existingBookings.push({
-                ...formData,
-                id: Date.now()
-            });
-            localStorage.setItem('bookings', JSON.stringify(existingBookings));
-
-            showConfirmation('¡Solicitud enviada exitosamente! Nos contactaremos contigo dentro de las próximas 24 horas.');
-            bookingForm.reset();
-        } catch (error) {
-            console.error('Error:', error);
-            showConfirmation('Hubo un error al enviar tu solicitud. Por favor, intenta nuevamente o contáctanos directamente.', true);
-        } finally {
-            // Restaurar botón
-            btnText.style.display = 'inline';
-            btnLoading.style.display = 'none';
-            submitBtn.disabled = false;
-        }
+        // Formspree se encargará del envío automáticamente
+        // No necesitamos procesar los datos aquí
     });
 
     // Envío del formulario de contacto con administradores
