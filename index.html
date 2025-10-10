@@ -8,12 +8,68 @@
     <link rel="stylesheet" href="tutorias_ernestito/styles/booking.css">
     <!-- SDK de EmailJS -->
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-    <script>
-        // Inicializar EmailJS con tu Public Key
-        (function() {
-            emailjs.init("TU_PUBLIC_KEY_AQUI"); // Reemplaza con tu Public Key real
-        })();
-    </script>
+    <style>
+        /* Estilos para notificaciones */
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        @keyframes slideOut {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(100%); opacity: 0; }
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            border-radius: 5px;
+            color: white;
+            font-weight: bold;
+            z-index: 10000;
+            max-width: 300px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            animation: slideIn 0.3s ease-out;
+        }
+
+        .notification.success {
+            background-color: #4CAF50;
+        }
+
+        .notification.error {
+            background-color: #f44336;
+        }
+
+        /* Estilos para el modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 15% auto;
+            padding: 20px;
+            border-radius: 8px;
+            width: 80%;
+            max-width: 500px;
+            text-align: center;
+        }
+
+        .close-modal {
+            float: right;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
     <!-- Navegación -->
@@ -35,120 +91,116 @@
     <section class="hero" id="inicio">
         <div class="hero-content">
             <h1>Aethra Academy: Tutorías personalizadas</h1>
-            <p>Somos la nueva generación de educación: estudiantes universitarios transformando vidas académicas.
-
-Creemos que el mejor apoyo viene de quien recién recorrió el camino. No somos profesores tradicionales.</p>
+            <p>Somos la nueva generación de educación: estudiantes universitarios transformando vidas académicas. Creemos que el mejor apoyo viene de quien recién recorrió el camino. No somos profesores tradicionales.</p>
             <div class="hero-buttons">
                 <a href="#agendar" class="cta-button primary">Agendar Primera Clase</a>
                 <a href="#tutores" class="cta-button secondary">Conocer Tutores</a>
             </div>
         </div>
     </section>
-<!-- Sección Quiénes Somos - Diseño Premium -->
-<section class="about-section" id="nosotros">
-    <div class="container">
-        <!-- Header con efecto especial -->
-        <div class="about-header">
-            <div class="section-badge">CONÓCENOS</div>
-            <h2>Más Que Tutores,<br><span class="gradient-text">Tus Aliados Académicos</span></h2>
-            <p class="section-subtitle">Descubre por qué los padres y estudiantes nos eligen</p>
-        </div>
 
-        <!-- Tarjetas de características principales -->
-        <div class="features-showcase">
-            <div class="feature-highlight">
-                <div class="feature-content">
-                    <div class="feature-number">01</div>
-                    <h3>Expertise Universitario Reciente</h3>
-                    <p>Nuestros tutores son estudiantes destacados de universidades top que dominan los contenidos actualizados y conocen los desafíos reales que enfrentan los estudiantes hoy.</p>
-                    <ul class="feature-list">
-                        <li>Conocimiento actualizado de currículos</li>
-                        <li>Técnicas de estudio modernas</li>
-                        <li>Experiencia práctica reciente</li>
-                    </ul>
+    <!-- Sección Quiénes Somos -->
+    <section class="about-section" id="nosotros">
+        <div class="container">
+            <div class="about-header">
+                <div class="section-badge">CONÓCENOS</div>
+                <h2>Más Que Tutores,<br><span class="gradient-text">Tus Aliados Académicos</span></h2>
+                <p class="section-subtitle">Descubre por qué los padres y estudiantes nos eligen</p>
+            </div>
+
+            <div class="features-showcase">
+                <div class="feature-highlight">
+                    <div class="feature-content">
+                        <div class="feature-number">01</div>
+                        <h3>Expertise Universitario Reciente</h3>
+                        <p>Nuestros tutores son estudiantes destacados de universidades top que dominan los contenidos actualizados y conocen los desafíos reales que enfrentan los estudiantes hoy.</p>
+                        <ul class="feature-list">
+                            <li>Conocimiento actualizado de currículos</li>
+                            <li>Técnicas de estudio modernas</li>
+                            <li>Experiencia práctica reciente</li>
+                        </ul>
+                    </div>
+                    <div class="feature-visual">
+                        <div class="visual-card university-card">
+                            <div class="card-header">Universidad</div>
+                            <div class="card-content">Tutores de pregrado y posgrado</div>
+                        </div>
+                    </div>
                 </div>
-                <div class="feature-visual">
-                    <div class="visual-card university-card">
-                        <div class="card-header">Universidad</div>
-                        <div class="card-content">Tutores de pregrado y posgrado</div>
+
+                <div class="feature-highlight reverse">
+                    <div class="feature-content">
+                        <div class="feature-number">02</div>
+                        <h3>Enfoque 100% Personalizado</h3>
+                        <p>No creemos en soluciones genéricas. Cada estudiante recibe un plan de estudio diseñado específicamente para sus necesidades, estilo de aprendizaje y objetivos.</p>
+                        <ul class="feature-list">
+                            <li>Diagnóstico inicial gratuito</li>
+                            <li>Plan de estudio personalizado</li>
+                            <li>Seguimiento continuo del progreso</li>
+                        </ul>
+                    </div>
+                    <div class="feature-visual">
+                        <div class="visual-card personal-card">
+                            <div class="card-header">Personalización</div>
+                            <div class="card-content">Plan único para cada estudiante</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="feature-highlight">
+                    <div class="feature-content">
+                        <div class="feature-number">03</div>
+                        <h3>Resultados Comprobados</h3>
+                        <p>Nuestro método ha demostrado ser efectivo una y otra vez. Los estudiantes no solo mejoran su rendimiento, sino que desarrollan confianza y hábitos de estudio duraderos.</p>
+                        <ul class="feature-list">
+                            <li>Progreso visible desde las primeras sesiones</li>
+                            <li>95% de satisfacción reportada</li>
+                            <li>Desarrollo de autonomía académica</li>
+                        </ul>
+                    </div>
+                    <div class="feature-visual">
+                        <div class="visual-card results-card">
+                            <div class="card-header">Resultados</div>
+                            <div class="card-content">Hábitos de estudio duraderos</div>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="feature-highlight reverse">
-                <div class="feature-content">
-                    <div class="feature-number">02</div>
-                    <h3>Enfoque 100% Personalizado</h3>
-                    <p>No creemos en soluciones genéricas. Cada estudiante recibe un plan de estudio diseñado específicamente para sus necesidades, estilo de aprendizaje y objetivos.</p>
-                    <ul class="feature-list">
-                        <li>Diagnóstico inicial gratuito</li>
-                        <li>Plan de estudio personalizado</li>
-                        <li>Seguimiento continuo del progreso</li>
-                    </ul>
+            <div class="impact-stats">
+                <div class="stat-card">
+                    <div class="stat-icon">🎯</div>
+                    <div class="stat-data">
+                        <div class="stat-number">98%</div>
+                        <div class="stat-label">de estudiantes mejoran su rendimiento académico</div>
+                    </div>
                 </div>
-                <div class="feature-visual">
-                    <div class="visual-card personal-card">
-                        <div class="card-header">Personalización</div>
-                        <div class="card-content">Plan único para cada estudiante</div>
+                <div class="stat-card">
+                    <div class="stat-icon">⚡</div>
+                    <div class="stat-data">
+                        <div class="stat-number">24/7</div>
+                        <div class="stat-label">soporte y seguimiento</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🌟</div>
+                    <div class="stat-data">
+                        <div class="stat-number">4.9/5</div>
+                        <div class="stat-label">rating de satisfacción</div>
                     </div>
                 </div>
             </div>
 
-            <div class="feature-highlight">
-                <div class="feature-content">
-                    <div class="feature-number">03</div>
-                    <h3>Resultados Comprobados</h3>
-                    <p>Nuestro método ha demostrado ser efectivo una y otra vez. Los estudiantes no solo mejoran su rendimiento, sino que desarrollan confianza y hábitos de estudio duraderos.</p>
-                    <ul class="feature-list">
-                        <li>Progreso visible desde las primeras sesiones</li>
-                        <li>95% de satisfacción reportada</li>
-                        <li>Desarrollo de autonomía académica</li>
-                    </ul>
-                </div>
-                <div class="feature-visual">
-                    <div class="visual-card results-card">
-                        <div class="card-header">Resultados</div>
-                        <div class="card-content">Hábitos de estudio duraderos</div>
-                    </div>
+            <div class="cta-section">
+                <div class="cta-content">
+                    <h3>¿Listo para Transformar el Rendimiento Académico?</h3>
+                    <p>Únete a los cientos de estudiantes que ya descubrieron el poder de la educación personalizada</p>
+                    <a href="#agendar" class="cta-button primary">Comenzar Ahora</a>
                 </div>
             </div>
         </div>
+    </section>
 
-        <!-- Estadísticas impactantes -->
-        <div class="impact-stats">
-            <div class="stat-card">
-                <div class="stat-icon">🎯</div>
-                <div class="stat-data">
-                    <div class="stat-number">98%</div>
-                    <div class="stat-label">de estudiantes mejoran su rendimiento académico</div>
-                </div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-icon">⚡</div>
-                <div class="stat-data">
-                    <div class="stat-number">24/7</div>
-                    <div class="stat-label">soporte y seguimiento</div>
-                </div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-icon">🌟</div>
-                <div class="stat-data">
-                    <div class="stat-number">4.9/5</div>
-                    <div class="stat-label">rating de satisfacción</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Llamada a la acción -->
-        <div class="cta-section">
-            <div class="cta-content">
-                <h3>¿Listo para Transformar el Rendimiento Académico?</h3>
-                <p>Únete a los cientos de estudiantes que ya descubrieron el poder de la educación personalizada</p>
-                <a href="#agendar" class="cta-button primary">Comenzar Ahora</a>
-            </div>
-        </div>
-    </div>
-</section>
     <!-- Sección de Niveles -->
     <section class="levels-section" id="clases">
         <div class="container">
@@ -400,44 +452,43 @@ Creemos que el mejor apoyo viene de quien recién recorrió el camino. No somos 
     <script src="tutorias_ernestito/scripts/main.js"></script>
     <script src="tutorias_ernestito/scripts/booking.js"></script>
 
-    <!-- Script para EmailJS -->
+    <!-- Script de EmailJS - LISTO PARA USAR -->
     <script>
-        // Configuración de EmailJS
-        const SERVICE_ID = 'service_rpolnux'; // Tu Service ID
-        const BOOKING_TEMPLATE_ID = 'TU_TEMPLATE_ID_BOOKING'; // Reemplaza con tu Template ID para agendamiento
-        const CONTACT_TEMPLATE_ID = 'TU_TEMPLATE_ID_CONTACT'; // Reemplaza con tu Template ID para contacto
+        // =============================================
+        // CONFIGURACIÓN - REEMPLAZA CON TUS DATOS REALES
+        // =============================================
+        const EMAILJS_CONFIG = {
+            SERVICE_ID: 'service_rpolnux',                    // Tu Service ID
+            BOOKING_TEMPLATE_ID: 'template_y5ft9ya',
+            CONTACT_TEMPLATE_ID: 'template_y5ft9ya',
+            PUBLIC_KEY: '_aSnkHZbMK-8jRI9e'                  // Tu Public Key de EmailJS
+        };
 
-        // Función para mostrar notificaciones
+        // =============================================
+        // INICIALIZACIÓN
+        // =============================================
+        console.log('🔧 Inicializando EmailJS...');
+
+        try {
+            emailjs.init(EMAILJS_CONFIG.PUBLIC_KEY);
+            console.log('✅ EmailJS inicializado correctamente');
+        } catch (error) {
+            console.error('❌ Error inicializando EmailJS:', error);
+            showNotification('Error de configuración. Por favor, contacta al administrador.', false);
+        }
+
+        // =============================================
+        // FUNCIONES AUXILIARES
+        // =============================================
         function showNotification(message, isSuccess = true) {
-            // Crear elemento de notificación
+            console.log(`📢 Notificación: ${message} | Éxito: ${isSuccess}`);
+
             const notification = document.createElement('div');
             notification.className = `notification ${isSuccess ? 'success' : 'error'}`;
             notification.textContent = message;
 
-            // Estilos básicos para la notificación
-            notification.style.cssText = `
-                position: fixed;
-                top: 20px;
-                right: 20px;
-                padding: 15px 20px;
-                border-radius: 5px;
-                color: white;
-                font-weight: bold;
-                z-index: 10000;
-                max-width: 300px;
-                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-                animation: slideIn 0.3s ease-out;
-            `;
-
-            if (isSuccess) {
-                notification.style.backgroundColor = '#4CAF50';
-            } else {
-                notification.style.backgroundColor = '#f44336';
-            }
-
             document.body.appendChild(notification);
 
-            // Remover después de 5 segundos
             setTimeout(() => {
                 notification.style.animation = 'slideOut 0.3s ease-in';
                 setTimeout(() => {
@@ -448,87 +499,106 @@ Creemos que el mejor apoyo viene de quien recién recorrió el camino. No somos 
             }, 5000);
         }
 
-        // Agregar estilos CSS para las animaciones
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes slideIn {
-                from { transform: translateX(100%); opacity: 0; }
-                to { transform: translateX(0); opacity: 1; }
+        function toggleButtonLoading(button, isLoading) {
+            if (button.id === 'submitBtn') {
+                const btnText = button.querySelector('.btn-text');
+                const btnLoading = button.querySelector('.btn-loading');
+                btnText.style.display = isLoading ? 'none' : 'inline';
+                btnLoading.style.display = isLoading ? 'inline' : 'none';
+            } else {
+                button.textContent = isLoading ? 'Enviando...' : 'Enviar Mensaje';
             }
-            @keyframes slideOut {
-                from { transform: translateX(0); opacity: 1; }
-                to { transform: translateX(100%); opacity: 0; }
-            }
-        `;
-        document.head.appendChild(style);
+            button.disabled = isLoading;
+        }
 
-        // Manejar el formulario de agendamiento
-        document.getElementById('bookingForm').addEventListener('submit', function(event) {
+        // =============================================
+        // MANEJADOR DE FORMULARIO DE AGENDAMIENTO
+        // =============================================
+        document.getElementById('bookingForm').addEventListener('submit', async function(event) {
             event.preventDefault();
+            console.log('📝 Enviando formulario de agendamiento...');
 
             const submitBtn = document.getElementById('submitBtn');
-            const btnText = submitBtn.querySelector('.btn-text');
-            const btnLoading = submitBtn.querySelector('.btn-loading');
+            toggleButtonLoading(submitBtn, true);
 
-            // Mostrar estado de carga
-            btnText.style.display = 'none';
-            btnLoading.style.display = 'inline';
-            submitBtn.disabled = true;
+            try {
+                // Validar datos antes de enviar
+                const formData = new FormData(this);
+                console.log('📋 Datos del formulario:', Object.fromEntries(formData));
 
-            // Enviar formulario con EmailJS
-            emailjs.sendForm(SERVICE_ID, BOOKING_TEMPLATE_ID, this)
-                .then(function(response) {
-                    console.log('SUCCESS!', response.status, response.text);
-                    showNotification('¡Solicitud enviada con éxito! Te contactaremos pronto.');
+                // Enviar con EmailJS
+                const response = await emailjs.sendForm(
+                    EMAILJS_CONFIG.SERVICE_ID,
+                    EMAILJS_CONFIG.BOOKING_TEMPLATE_ID,
+                    this
+                );
 
-                    // Limpiar formulario
-                    document.getElementById('bookingForm').reset();
+                console.log('✅ Éxito:', response);
+                showNotification('¡Solicitud enviada con éxito! Te contactaremos pronto.');
 
-                    // Mostrar modal de confirmación
-                    document.getElementById('confirmationModal').style.display = 'block';
-                }, function(error) {
-                    console.log('FAILED...', error);
-                    showNotification('Error al enviar el formulario. Por favor, inténtalo de nuevo.', false);
-                })
-                .finally(function() {
-                    // Restaurar estado normal del botón
-                    btnText.style.display = 'inline';
-                    btnLoading.style.display = 'none';
-                    submitBtn.disabled = false;
-                });
+                // Limpiar formulario
+                this.reset();
+
+                // Mostrar modal de confirmación
+                document.getElementById('confirmationModal').style.display = 'block';
+
+            } catch (error) {
+                console.error('❌ Error detallado:', error);
+
+                // Diagnóstico específico del error
+                let errorMessage = 'Error al enviar el formulario. ';
+
+                if (error.text && error.text.includes('Invalid template ID')) {
+                    errorMessage += 'Error de configuración: Template ID incorrecto.';
+                } else if (error.text && error.text.includes('Invalid service ID')) {
+                    errorMessage += 'Error de configuración: Service ID incorrecto.';
+                } else if (error.text && error.text.includes('Invalid user ID')) {
+                    errorMessage += 'Error de configuración: Public Key incorrecta.';
+                } else {
+                    errorMessage += 'Por favor, inténtalo de nuevo.';
+                }
+
+                showNotification(errorMessage, false);
+            } finally {
+                toggleButtonLoading(submitBtn, false);
+            }
         });
 
-        // Manejar el formulario de contacto con administradores
-        document.getElementById('adminContactForm').addEventListener('submit', function(event) {
+        // =============================================
+        // MANEJADOR DE FORMULARIO DE CONTACTO
+        // =============================================
+        document.getElementById('adminContactForm').addEventListener('submit', async function(event) {
             event.preventDefault();
+            console.log('📧 Enviando formulario de contacto...');
 
             const submitBtn = this.querySelector('.submit-btn');
-            const originalText = submitBtn.textContent;
+            toggleButtonLoading(submitBtn, true);
 
-            // Mostrar estado de carga
-            submitBtn.textContent = 'Enviando...';
-            submitBtn.disabled = true;
+            try {
+                const formData = new FormData(this);
+                console.log('📋 Datos del contacto:', Object.fromEntries(formData));
 
-            // Enviar formulario con EmailJS
-            emailjs.sendForm(SERVICE_ID, CONTACT_TEMPLATE_ID, this)
-                .then(function(response) {
-                    console.log('SUCCESS!', response.status, response.text);
-                    showNotification('¡Mensaje enviado con éxito! Te responderemos pronto.');
+                const response = await emailjs.sendForm(
+                    EMAILJS_CONFIG.SERVICE_ID,
+                    EMAILJS_CONFIG.CONTACT_TEMPLATE_ID,
+                    this
+                );
 
-                    // Limpiar formulario
-                    document.getElementById('adminContactForm').reset();
-                }, function(error) {
-                    console.log('FAILED...', error);
-                    showNotification('Error al enviar el mensaje. Por favor, inténtalo de nuevo.', false);
-                })
-                .finally(function() {
-                    // Restaurar estado normal del botón
-                    submitBtn.textContent = originalText;
-                    submitBtn.disabled = false;
-                });
+                console.log('✅ Éxito:', response);
+                showNotification('¡Mensaje enviado con éxito! Te responderemos pronto.');
+                this.reset();
+
+            } catch (error) {
+                console.error('❌ Error detallado:', error);
+                showNotification('Error al enviar el mensaje. Por favor, inténtalo de nuevo.', false);
+            } finally {
+                toggleButtonLoading(submitBtn, false);
+            }
         });
 
-        // Cerrar modal
+        // =============================================
+        // MANEJADOR DEL MODAL
+        // =============================================
         document.querySelector('.close-modal').addEventListener('click', function() {
             document.getElementById('confirmationModal').style.display = 'none';
         });
@@ -536,6 +606,8 @@ Creemos que el mejor apoyo viene de quien recién recorrió el camino. No somos 
         document.getElementById('modalCloseBtn').addEventListener('click', function() {
             document.getElementById('confirmationModal').style.display = 'none';
         });
+
+        console.log('🚀 Script de EmailJS cargado correctamente');
     </script>
 </body>
 </html>
