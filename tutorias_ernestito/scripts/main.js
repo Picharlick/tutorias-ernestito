@@ -2,7 +2,7 @@
 const tutors = [
     {
         id: 1,
-        name: "Santiago Ernesto",
+        name: "Nombre cualquiera",
         subject: "Matemáticas",
         grades: ["1secundaria", "2secundaria", "3secundaria"],
         rating: 4.9,
@@ -11,7 +11,7 @@ const tutors = [
     },
     {
         id: 2,
-        name: "Rodrigo Mosquera",
+        name: "Nombre cualquiera",
         subject: "Ciencias",
         grades: ["4primaria", "5primaria", "6primaria", "1secundaria"],
         rating: 4.8,
@@ -20,16 +20,16 @@ const tutors = [
     },
     {
         id: 3,
-        name: "Alesia Vásquez",
+        name: "Nombre cualquiera",
         subject: "Inglés",
         grades: ["3primaria", "4primaria", "5primaria", "6primaria", "1secundaria", "2secundaria"],
         rating: 5.0,
         experience: "3 años",
-        university: "Cato (miembro de vértice)"
+        university: "UP"
     },
     {
         id: 4,
-        name: "David Huaman",
+        name: "Nombre cualquiera",
         subject: "Física y Química",
         grades: ["3secundaria", "4secundaria", "5secundaria"],
         rating: 4.7,
