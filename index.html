@@ -6,6 +6,14 @@
     <title>Tutorías - Clases Personalizadas</title>
     <link rel="stylesheet" href="tutorias_ernestito/styles/main.css">
     <link rel="stylesheet" href="tutorias_ernestito/styles/booking.css">
+    <!-- SDK de EmailJS -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script>
+        // Inicializar EmailJS con tu Public Key
+        (function() {
+            emailjs.init("TU_PUBLIC_KEY_AQUI"); // Reemplaza con tu Public Key real
+        })();
+    </script>
 </head>
 <body>
     <!-- Navegación -->
@@ -215,7 +223,7 @@ Creemos que el mejor apoyo viene de quien recién recorrió el camino. No somos 
             <p class="section-subtitle">Presencial o Virtual</p>
 
             <div class="booking-form-container">
-                <form id="bookingForm" class="booking-form" action="https://formspree.io/f/xgvnlbnl" method="POST">
+                <form id="bookingForm" class="booking-form">
                     <div class="form-row">
                         <div class="form-group">
                             <label for="studentName">Nombre del Estudiante *</label>
@@ -351,8 +359,8 @@ Creemos que el mejor apoyo viene de quien recién recorrió el camino. No somos 
                 </div>
 
                 <div class="admin-contact">
-    <h3>Contacto Directo con Administradores</h3>
-    <form id="adminContactForm" action="https://formspree.io/f/xqayyeep" method="POST">
+                    <h3>Contacto Directo con Administradores</h3>
+                    <form id="adminContactForm">
                         <div class="form-group">
                             <label for="adminEmail">Tu Email *</label>
                             <input type="email" id="adminEmail" name="email" required>
@@ -391,5 +399,143 @@ Creemos que el mejor apoyo viene de quien recién recorrió el camino. No somos 
 
     <script src="tutorias_ernestito/scripts/main.js"></script>
     <script src="tutorias_ernestito/scripts/booking.js"></script>
+
+    <!-- Script para EmailJS -->
+    <script>
+        // Configuración de EmailJS
+        const SERVICE_ID = 'service_rpolnux'; // Tu Service ID
+        const BOOKING_TEMPLATE_ID = 'TU_TEMPLATE_ID_BOOKING'; // Reemplaza con tu Template ID para agendamiento
+        const CONTACT_TEMPLATE_ID = 'TU_TEMPLATE_ID_CONTACT'; // Reemplaza con tu Template ID para contacto
+
+        // Función para mostrar notificaciones
+        function showNotification(message, isSuccess = true) {
+            // Crear elemento de notificación
+            const notification = document.createElement('div');
+            notification.className = `notification ${isSuccess ? 'success' : 'error'}`;
+            notification.textContent = message;
+
+            // Estilos básicos para la notificación
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                padding: 15px 20px;
+                border-radius: 5px;
+                color: white;
+                font-weight: bold;
+                z-index: 10000;
+                max-width: 300px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                animation: slideIn 0.3s ease-out;
+            `;
+
+            if (isSuccess) {
+                notification.style.backgroundColor = '#4CAF50';
+            } else {
+                notification.style.backgroundColor = '#f44336';
+            }
+
+            document.body.appendChild(notification);
+
+            // Remover después de 5 segundos
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease-in';
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.parentNode.removeChild(notification);
+                    }
+                }, 300);
+            }, 5000);
+        }
+
+        // Agregar estilos CSS para las animaciones
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIn {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            @keyframes slideOut {
+                from { transform: translateX(0); opacity: 1; }
+                to { transform: translateX(100%); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Manejar el formulario de agendamiento
+        document.getElementById('bookingForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const submitBtn = document.getElementById('submitBtn');
+            const btnText = submitBtn.querySelector('.btn-text');
+            const btnLoading = submitBtn.querySelector('.btn-loading');
+
+            // Mostrar estado de carga
+            btnText.style.display = 'none';
+            btnLoading.style.display = 'inline';
+            submitBtn.disabled = true;
+
+            // Enviar formulario con EmailJS
+            emailjs.sendForm(SERVICE_ID, BOOKING_TEMPLATE_ID, this)
+                .then(function(response) {
+                    console.log('SUCCESS!', response.status, response.text);
+                    showNotification('¡Solicitud enviada con éxito! Te contactaremos pronto.');
+
+                    // Limpiar formulario
+                    document.getElementById('bookingForm').reset();
+
+                    // Mostrar modal de confirmación
+                    document.getElementById('confirmationModal').style.display = 'block';
+                }, function(error) {
+                    console.log('FAILED...', error);
+                    showNotification('Error al enviar el formulario. Por favor, inténtalo de nuevo.', false);
+                })
+                .finally(function() {
+                    // Restaurar estado normal del botón
+                    btnText.style.display = 'inline';
+                    btnLoading.style.display = 'none';
+                    submitBtn.disabled = false;
+                });
+        });
+
+        // Manejar el formulario de contacto con administradores
+        document.getElementById('adminContactForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const submitBtn = this.querySelector('.submit-btn');
+            const originalText = submitBtn.textContent;
+
+            // Mostrar estado de carga
+            submitBtn.textContent = 'Enviando...';
+            submitBtn.disabled = true;
+
+            // Enviar formulario con EmailJS
+            emailjs.sendForm(SERVICE_ID, CONTACT_TEMPLATE_ID, this)
+                .then(function(response) {
+                    console.log('SUCCESS!', response.status, response.text);
+                    showNotification('¡Mensaje enviado con éxito! Te responderemos pronto.');
+
+                    // Limpiar formulario
+                    document.getElementById('adminContactForm').reset();
+                }, function(error) {
+                    console.log('FAILED...', error);
+                    showNotification('Error al enviar el mensaje. Por favor, inténtalo de nuevo.', false);
+                })
+                .finally(function() {
+                    // Restaurar estado normal del botón
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+                });
+        });
+
+        // Cerrar modal
+        document.querySelector('.close-modal').addEventListener('click', function() {
+            document.getElementById('confirmationModal').style.display = 'none';
+        });
+
+        document.getElementById('modalCloseBtn').addEventListener('click', function() {
+            document.getElementById('confirmationModal').style.display = 'none';
+        });
+    </script>
 </body>
 </html>
