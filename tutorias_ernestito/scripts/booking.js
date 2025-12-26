@@ -1,87 +1,109 @@
-// Manejo del formulario de agendamiento
-document.addEventListener('DOMContentLoaded', function() {
-    const bookingForm = document.getElementById('bookingForm');
-    const adminContactForm = document.getElementById('adminContactForm');
-    const confirmationModal = document.getElementById('confirmationModal');
-    const modalCloseBtn = document.getElementById('modalCloseBtn');
-    const closeModal = document.querySelector('.close-modal');
+// Script para el formulario de reservas
+$(document).ready(function() {
+    // Variables globales
+    var formReserva = $('#bookingForm');
+    var formContacto = $('#adminContactForm');
+    var modal = $('#confirmationModal');
+    var btnCerrar = $('#modalCloseBtn');
+    var cerrarModal = $('.close-modal');
 
-    // Configurar fecha mínima como hoy
-    const today = new Date().toISOString().split('T')[0];
-    document.getElementById('fecha').min = today;
+    // Poner la fecha de hoy como mínimo
+    var hoy = new Date();
+    var dia = hoy.getDate();
+    var mes = hoy.getMonth() + 1;
+    var año = hoy.getFullYear();
 
-    // Envío del formulario principal (AGENDAMIENTO)
-    bookingForm.addEventListener('submit', async function(e) {
-        // NO USAR e.preventDefault() - Permitir que Formspree envíe
+    if(dia < 10) {
+        dia = '0' + dia;
+    }
+    if(mes < 10) {
+        mes = '0' + mes;
+    }
 
-        const submitBtn = document.getElementById('submitBtn');
-        const btnText = submitBtn.querySelector('.btn-text');
-        const btnLoading = submitBtn.querySelector('.btn-loading');
+    var fechaHoy = año + '-' + mes + '-' + dia;
+    $('#fecha').attr('min', fechaHoy);
 
-        // Mostrar estado de carga
-        btnText.style.display = 'none';
-        btnLoading.style.display = 'inline';
-        submitBtn.disabled = true;
+    // Cuando se envía el formulario principal
+    formReserva.submit(function(e) {
+        // Dejar que Formspree lo maneje
 
-        // Formspree se encargará del envío automáticamente
-        // No necesitamos procesar los datos aquí
+        var boton = $('#submitBtn');
+        var textoBoton = boton.find('.btn-text');
+        var loading = boton.find('.btn-loading');
+
+        // Mostrar el loading
+        textoBoton.hide();
+        loading.show();
+        boton.prop('disabled', true);
+
+        // Formspree hace el resto
     });
 
-    // Envío del formulario de contacto con administradores
-    // COMENTADO - Formspree manejará el envío automáticamente
+    // Formulario de contacto con admins
+    // Lo dejé comentado porque Formspree lo maneja solo
     /*
-    adminContactForm.addEventListener('submit', async function(e) {
+    formContacto.submit(function(e) {
         e.preventDefault();
 
-        const formData = {
-            email: document.getElementById('adminEmail').value,
-            subject: document.getElementById('adminSubject').value,
-            message: document.getElementById('adminMessage').value,
-            timestamp: new Date().toISOString()
+        var email = $('#adminEmail').val();
+        var asunto = $('#adminSubject').val();
+        var mensaje = $('#adminMessage').val();
+        var fecha = new Date();
+
+        var datos = {
+            email: email,
+            subject: asunto,
+            message: mensaje,
+            timestamp: fecha.toISOString()
         };
 
-        try {
-            // Simular envío
-            await new Promise(resolve => setTimeout(resolve, 1500));
+        // Hacer como que se envía
+        setTimeout(function() {
+            // Guardar en el navegador
+            var contactos = localStorage.getItem('contacts');
+            if(contactos == null) {
+                contactos = [];
+            } else {
+                contactos = JSON.parse(contactos);
+            }
 
-            // Guardar en localStorage
-            const existingContacts = JSON.parse(localStorage.getItem('contacts') || '[]');
-            existingContacts.push({
-                ...formData,
-                id: Date.now()
-            });
-            localStorage.setItem('contacts', JSON.stringify(existingContacts));
+            datos.id = Date.now();
+            contactos.push(datos);
+            localStorage.setItem('contacts', JSON.stringify(contactos));
 
-            showConfirmation('¡Mensaje enviado! Los administradores te contactarán pronto.');
-            adminContactForm.reset();
-        } catch (error) {
-            console.error('Error:', error);
-            showConfirmation('Error al enviar el mensaje. Por favor, intenta nuevamente.', true);
-        }
+            mostrarMensaje('¡Mensaje enviado! Los administradores te contactarán pronto.');
+            formContacto[0].reset();
+        }, 1500);
     });
     */
 
-    // Mostrar modal de confirmación
-    function showConfirmation(message, isError = false) {
-        const modalMessage = document.getElementById('modalMessage');
-        modalMessage.textContent = message;
-        modalMessage.style.color = isError ? '#dc2626' : '#1f2937';
-        confirmationModal.style.display = 'block';
+    // Función para mostrar el modal
+    function mostrarMensaje(texto, error) {
+        var mensajeModal = $('#modalMessage');
+        mensajeModal.text(texto);
+
+        if(error == true) {
+            mensajeModal.css('color', '#dc2626');
+        } else {
+            mensajeModal.css('color', '#1f2937');
+        }
+
+        modal.css('display', 'block');
     }
 
-    // Cerrar modal
-    modalCloseBtn.addEventListener('click', function() {
-        confirmationModal.style.display = 'none';
+    // Cerrar el modal
+    btnCerrar.click(function() {
+        modal.css('display', 'none');
     });
 
-    closeModal.addEventListener('click', function() {
-        confirmationModal.style.display = 'none';
+    cerrarModal.click(function() {
+        modal.css('display', 'none');
     });
 
-    // Cerrar modal al hacer clic fuera
-    window.addEventListener('click', function(e) {
-        if (e.target === confirmationModal) {
-            confirmationModal.style.display = 'none';
+    // Si hace clic afuera del modal, cerrar
+    $(window).click(function(e) {
+        if(e.target == modal[0]) {
+            modal.css('display', 'none');
         }
     });
 });

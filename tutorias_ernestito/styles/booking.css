@@ -1,23 +1,27 @@
-/* Sistema de Agendamiento */
+/* Formulario de reservas */
 .booking-section {
     background: var(--background);
 }
 
 .booking-form-container {
     max-width: 800px;
-    margin: 0 auto;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .booking-form {
     background: white;
-    padding: 3rem;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    padding-left: 3rem;
+    padding-right: 3rem;
     border-radius: 15px;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
 }
 
 .form-row {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 50% 50%;
     gap: 1.5rem;
     margin-bottom: 1.5rem;
 }
@@ -28,7 +32,8 @@
 }
 
 .form-group.full-width {
-    grid-column: 1 / -1;
+    grid-column-start: 1;
+    grid-column-end: 3;
 }
 
 .form-group label {
@@ -37,8 +42,24 @@
     color: var(--text);
 }
 
-.form-group input,
-.form-group select,
+.form-group input {
+    padding: 12px 15px;
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+    font-family: inherit;
+}
+
+.form-group select {
+    padding: 12px 15px;
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+    font-family: inherit;
+}
+
 .form-group textarea {
     padding: 12px 15px;
     border: 2px solid var(--border);
@@ -48,8 +69,16 @@
     font-family: inherit;
 }
 
-.form-group input:focus,
-.form-group select:focus,
+.form-group input:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+.form-group select:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
 .form-group textarea:focus {
     outline: none;
     border-color: var(--primary);
@@ -59,7 +88,10 @@
     background: var(--primary);
     color: white;
     border: none;
-    padding: 15px 40px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 40px;
+    padding-right: 40px;
     border-radius: 8px;
     font-size: 1.1rem;
     font-weight: 600;
@@ -82,7 +114,7 @@
     box-shadow: none;
 }
 
-/* Sección de Contacto */
+/* Sección donde contactarnos */
 .contact-section {
     background: var(--background-alt);
 }
@@ -94,7 +126,13 @@
     margin-top: 2rem;
 }
 
-.contact-info,
+.contact-info {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: var(--shadow);
+}
+
 .admin-contact {
     background: white;
     padding: 2rem;
@@ -104,7 +142,8 @@
 
 .contact-item {
     margin-bottom: 1rem;
-    padding: 1rem 0;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
     border-bottom: 1px solid var(--border);
 }
 
@@ -119,6 +158,7 @@
     color: var(--primary);
 }
 
+/* Para celulares */
 @media (max-width: 768px) {
     .form-row {
         grid-template-columns: 1fr;
@@ -129,6 +169,14 @@
     }
 
     .booking-form {
-        padding: 2rem 1.5rem;
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+
+    .form-group.full-width {
+        grid-column-start: 1;
+        grid-column-end: 2;
     }
 }
